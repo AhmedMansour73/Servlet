@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Calculator Form</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    label { display: block; margin: 8px 0; }
+    input, select { padding: 6px; width: 200px; }
+    button { padding: 8px 12px; margin-top: 10px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h2>Enter operation and numbers</h2>
+
+  <!-- If your servlet mapping is /calc -->
+  <form action="/sessionOneTest/calcForm" method="get" accept-charset="utf-8">
+    <label>
+      Operation:
+      <select name="operation" required>
+        <option value="add">Addition</option>
+        <option value="sub">Subtraction</option>
+        <option value="mul">Multiplication</option>
+        <option value="div">Division</option>
+      </select>
+    </label>
+
+    <label>
+      First number:
+      <input name="number1" type="number" step="any" required />
+    </label>
+
+    <label>
+      Second number:
+      <input name="number2" type="number" step="any" required />
+    </label>
+
+    <button type="submit">Calculate</button>
+  </form>
+</body>
+</html>
