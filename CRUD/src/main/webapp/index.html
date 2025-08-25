@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/Style.css">
     <title>Student Info</title>
 </head>
 <body >
@@ -39,35 +39,97 @@
 
 <div class="container mt-5">
 	<div class="start-templat">
-		<h1> Add Student</h1>
-		<form action="SaveServlet" method="POST" >
+		<h1 class="pt-3"> Add Student</h1>
+		<form action="SaveServlet" method="POST" onsubmit="return validateForm()">
 		
-		<label for="studentName">Student Name </label>
-        <input type="text" class="form-control mb-3" id="studentName" name="name">
+		<!-- get  student name  as text in name -->
+		<label for="Name">Name </label>
+        <input type="text" class="form-control mb-3" id="Name" name="name" placeholder="Ahmed Mansour" required
+         oninput="this.setCustomValidity('')">
 		
-		<label for="email">Email </label>
-        <input type="email" class="form-control mb-3" id="email" name="email">
+		<!-- get  student SSN  as text in SSN -->
+		<!-- type="text" SSN can have leading zeros (e.g., 012345678), and <input type="number"> will drop those zeros.  -->
+		<label for="SSN">SSN</label>
+        <input type="text" class="form-control mb-3" id="SSN" name="SSN" maxlength="14"  pattern="[0-9]{14}" placeholder="Enter 14-digit SSN" required
+        oninvalid="this.setCustomValidity('SSN must be 14 digit and not have letters')"
+         oninput="this.setCustomValidity('')" >  
         
-        <label for="password">Password </label>
-        <input type="password" class="form-control mb-3" id="password" name="password">
+        <!-- get  student birth date  as text in  -->
+        <!-- type="date" Sin HTML5 always stores the value as YYYY-MM-DD (ISO 8601).(like 2000-05-15).  -->
+		<label for="BirthDate">Birth Date</label>
+        <input type="text" class="form-control mb-3" id="BirthDate" name="birthDate" placeholder="DD-MM-YYYY"  pattern="\d{2}-\d{2}-\d{4}"  required 
+         oninvalid="this.setCustomValidity('BirthDate this date must like 20-01-2000')"
+         oninput="this.setCustomValidity('')">
+         
+        <!-- get  student country date  as text in  -->
+        <label for="Country">Country </label>
+        <input type="text" class="form-control mb-3" id="Country" name="country" required>
         
-        <label for="country">Country </label>
-        <input type="text" class="form-control mb-3" id="country" name="country">
+        <!-- get  student Age date  as text in  -->
+        <label for="Age">Age </label>
+        <input type="number" class="form-control mb-3" id="Age" name="age" required>
         
-        <button 
-        class="btn btn-success d-block w-100" id="addBtn">Add Student</button>
+		
+		<!-- get  student email as text in  -->
+		<label for="Email">Email </label>
+        <input type="email" class="form-control mb-3" id="Email" name="email" placeholder="Enter your email"  
+        oninvalid="this.setCustomValidity('enter vaild email')"
+        oninput="this.setCustomValidity('')">
+        
+        <label for="Password">Password </label>
+        <div class="password-container">
+		    <input type="password" class="form-control mb-3" id="Password" name="password" placeholder="Ahmed@123"
+		       pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,32}$"
+		       oninvalid="this.setCustomValidity('Password must be between 8 and 32 characters and include: an uppercase letter, a lowercase letter, a number, and a special character.')" 
+		       oninput="this.setCustomValidity('')">
+		    <button type="button" onclick="togglePassword()">👁️</button>
+		</div>
+        
+        
+        
+        
+        <!-- get  student Phone Number date  as text in  -->
+        <label for="PhoneNumber">Phone Number </label>
+        <input type="text" class="form-control mb-3" id=""PhoneNumber"" name="phone" required>
+        
+        <button  class="btn btn-success d-block w-100" id="addBtn">Add Student</button>
         
 		</form>		
 	</div>
 </div>
 
-<div class="container mt-3 ">
-	<a class="btn btn-secondary w-100" href="ViewSevlet">View Students</a>
+<div class="container mt-3 mb-5">
+
+	<a class="btn btn-secondary w-100" href="ViewMembersServlet">View Students</a>
 </div>
 
    
 
+	<script>
+		  function validateForm() {
+		    const email = document.getElementById("Email").value.trim();
+		    const password = document.getElementById("Password").value.trim();
+		
+		    // if email has value and password not
+		    if (email !== "" && password === "") {
+		      alert("please enter your password");
+		      return false; 
+		    }
+		
+		    return true; 
+		  }
+		  
+		  function togglePassword() {
+			    const passInput = document.getElementById("Password");
+			    if (passInput.type === "password") {
+			      passInput.type = "text";  // Show password
+			    } else {
+			      passInput.type = "password"; // Hide password
+			    }
+			  }
+	</script>
     <script src="js/bootstrap.bundle.min.js"></script>
+    
     <!-- 
    		 <script src="js/main.js"></script>
      -->
